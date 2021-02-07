@@ -1,1 +1,11 @@
 .idea
+node_modules
+build
+
+.tsbuildinfo
+
+# Response validation files are built with `make schemas`
+*.schema.check.ts
+*.json-schema.json
+
+

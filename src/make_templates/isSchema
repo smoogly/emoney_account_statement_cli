@@ -1,0 +1,18 @@
+import Ajv from "ajv";
+import { %%name%% } from "./%%name%%.schema";
+import * as schema from "./%%name%%.json-schema.json";
+
+const validate = new Ajv().compile(schema);
+
+type ArrVal<T> = T extends ArrayLike<infer I> ? I : never;
+type ErrorObject = ArrVal<(typeof validate)["errors"]>;
+interface Validation {
+    (val: {}): val is %%name%%;
+    errors?: Array<ErrorObject> | null;
+}
+
+export const is%%name%%: Validation = (val: {}): val is %%name%% => {
+    const valid = validate(val);
+    is%%name%%.errors = validate.errors;
+    return valid;
+};
